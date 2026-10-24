@@ -1,0 +1,7 @@
+{
+    "name": "Translate",
+    "description": "Long-press a message and tap Translate. Uses Google Translate and shows the result as a message only you can see.",
+    "authors": [{ "name": "HsHs-501" }],
+    "main": "index.js",
+    "hash": "1"
+}
