@@ -56,7 +56,7 @@ To install this plugin in **Revenge** on Discord (Android):
 
 1. Copy the plugin URL:
    ```text
-   https://hshs-501.github.io/translate_plugin/manifest.json
+   https://hshs-501.github.io/translate_plugin/
    ```
 2. Open Discord and go to **User Settings** (your profile icon).
 3. Scroll down to the **Revenge** section and tap **Plugins**.
