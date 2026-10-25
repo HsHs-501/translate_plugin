@@ -28,9 +28,28 @@ Ever get tired of copying messages, opening a browser or translation app, and th
 
 - 🌍 **Inline Translation**: Translate any message natively within the chat view without leaving Discord.
 - 🖱️ **Context Menu Integration**: Adds a seamless "Translate" button straight into the native Discord message context menu.
+- ⚙️ **Language Customization**: Choose your preferred "Translate from" and "Translate to" languages directly from the plugin settings, or use Auto-detect.
 - ⚡ **Lightweight & Fast**: Optimized for speed so it won't lag your client or slow down your app.
 - 🚀 **Zero Build / No Bundler**: Built in plain ES2019 IIFE format for Revenge Classic.
 - 🛡️ **Safe & Stable**: Seamlessly integrates into the Discord UI without breaking core app functions.
+
+---
+
+## 📸 Showcase
+
+### Chat Translation
+Seamlessly translate incoming and outgoing messages directly in the chat.
+
+| English to Arabic | Arabic to English |
+| :---: | :---: |
+| <img src="1000329699.jpg" width="300" alt="English to Arabic Translation"/> | <img src="1000329698.jpg" width="300" alt="Arabic to English Translation"/> |
+
+### Plugin Settings
+Easily configure your translation preferences.
+
+| Main Settings | Language Selection | Search & Auto-detect |
+| :---: | :---: | :---: |
+| <img src="1000329705.jpg" width="250" alt="Main Settings"/> | <img src="1000329703.jpg" width="250" alt="Language Selection"/> | <img src="1000329704.jpg" width="250" alt="Search Languages"/> |
 
 ---
 
