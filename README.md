@@ -42,14 +42,14 @@ Seamlessly translate incoming and outgoing messages directly in the chat.
 
 | English to Arabic | Arabic to English |
 | :---: | :---: |
-| <img src="1000329699.jpg" width="300" alt="English to Arabic Translation"/> | <img src="1000329698.jpg" width="300" alt="Arabic to English Translation"/> |
+| <img src="Showcase/1000329699.jpg" width="300" alt="English to Arabic Translation"/> | <img src="Showcase/1000329698.jpg" width="300" alt="Arabic to English Translation"/> |
 
 ### Plugin Settings
 Easily configure your translation preferences.
 
 | Main Settings | Language Selection | Search & Auto-detect |
 | :---: | :---: | :---: |
-| <img src="1000329705.jpg" width="250" alt="Main Settings"/> | <img src="1000329703.jpg" width="250" alt="Language Selection"/> | <img src="1000329704.jpg" width="250" alt="Search Languages"/> |
+| <img src="Showcase/1000329705.jpg" width="250" alt="Main Settings"/> | <img src="Showcase/1000329703.jpg" width="250" alt="Language Selection"/> | <img src="Showcase/1000329704.jpg" width="250" alt="Search Languages"/> |
 
 ---
 
