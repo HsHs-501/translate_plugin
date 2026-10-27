@@ -2,7 +2,7 @@
 
 # 🌐 Hozy's Translator
 
-**A lightweight, powerful Revenge plugin for Discord (Android)**  
+**A lightweight, powerful Valenced plugin for Discord (Android)**  
 *Seamlessly translate messages directly within your chat without switching apps.*
 
 <br/>
@@ -10,7 +10,7 @@
 [![Discord Server](https://img.shields.io/badge/Discord-Join%20Server-5865F2?style=for-the-badge&logo=discord&logoColor=white)](https://discord.gg/jwpb9YdBJa)
 [![Developer](https://img.shields.io/badge/Developer-HsHs--501-181717?style=for-the-badge&logo=github&logoColor=white)](#)
 [![Discord User](https://img.shields.io/badge/Discord-.95.4-5865F2?style=for-the-badge&logo=discord&logoColor=white)](https://discord.gg/jwpb9YdBJa)
-[![Platform](https://img.shields.io/badge/Platform-Discord%20Android%20(Revenge)-3DDC84?style=for-the-badge&logo=android&logoColor=white)](#)
+[![Platform](https://img.shields.io/badge/Platform-Discord%20Android%20(Valenced)-3DDC84?style=for-the-badge&logo=android&logoColor=white)](#)
 
 <br/>
 
@@ -20,7 +20,7 @@
 
 ## 📖 What is this?
 
-I built this translator plugin for the Revenge Discord client on Android because I was tired of switching apps just to read messages in other languages. This lets you translate everything directly inside your chat view.
+I built this translator plugin for the Valenced Discord client on Android because I was tired of switching apps just to read messages in other languages. This lets you translate everything directly inside your chat view.
 
 ---
 
@@ -52,14 +52,14 @@ Easily configure your translation preferences.
 
 ## 📥 Installation
 
-To install this plugin in **Revenge** on Discord (Android):
+To install this plugin in **Valenced** on Discord (Android):
 
 1. Copy the plugin URL:
    ```text
    https://hshs-501.github.io/translate_plugin/
    ```
 2. Open Discord and go to **User Settings** (your profile icon).
-3. Scroll down to the **Revenge** section and tap **Plugins**.
+3. Scroll down to the **Valenced** section and tap **Plugins**.
 4. Tap the **`+`** (Install Plugin) button at the top right.
 5. Paste the plugin URL and confirm the install.
 6. The plugin will load automatically. Enable the toggle and restart your app!
@@ -83,5 +83,5 @@ To install this plugin in **Revenge** on Discord (Android):
 ---
 
 <div align="center">
-<sub>Built with ❤️ for the Revenge Discord Community</sub>
+<sub>Built with ❤️ for the Valenced Discord Community</sub>
 </div>
