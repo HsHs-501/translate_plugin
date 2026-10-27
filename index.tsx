@@ -11,11 +11,7 @@ import {
 } from "react-native";
 import { plugin, patcher } from "@valenced/api";
 import { findByProps } from "@valenced/discord/metro";
-import {
-    TableRowGroup,
-    TableRow,
-    TableSwitchRow,
-} from "@valenced/discord/design";
+import { Design } from "@valenced/discord/design";
 
 export type TranslationEngine = "google" | "microsoft" | "brave";
 
@@ -171,7 +167,7 @@ export const getLanguageName = (code: string): string => {
 };
 
 // -------------------------------------------------------------
-// Translation Engines Implementation
+// Translation Engines
 // -------------------------------------------------------------
 
 // 1. Google Translate
@@ -223,7 +219,7 @@ async function getBingToken(): Promise<{ ig: string; key: string; token: string 
     });
 
     if (!res.ok) {
-        throw new Error(`Failed to access Bing Translator page: ${res.status}`);
+        throw new Error(`Failed to access Bing Translator: ${res.status}`);
     }
 
     const html = await res.text();
@@ -233,7 +229,7 @@ async function getBingToken(): Promise<{ ig: string; key: string; token: string 
     );
 
     if (!igMatch || !paramsMatch) {
-        throw new Error("Could not extract Microsoft Translator authentication parameters");
+        throw new Error("Could not extract Microsoft Translator parameters");
     }
 
     cachedBingToken = {
@@ -241,7 +237,7 @@ async function getBingToken(): Promise<{ ig: string; key: string; token: string 
         key: paramsMatch[1],
         token: paramsMatch[2],
     };
-    bingTokenExpiry = now + 10 * 60 * 1000; // Cache for 10 minutes
+    bingTokenExpiry = now + 10 * 60 * 1000;
     return cachedBingToken;
 }
 
@@ -276,7 +272,7 @@ async function microsoftTranslate(
     );
 
     if (!res.ok) {
-        throw new Error(`Microsoft Translator API error: ${res.status}`);
+        throw new Error(`Microsoft Translator error: ${res.status}`);
     }
 
     const data = await res.json();
@@ -297,7 +293,6 @@ async function braveTranslate(
     target: string,
     apiKey?: string
 ): Promise<{ text: string; detected: string }> {
-    // Attempt Brave translate endpoint
     try {
         const headers: Record<string, string> = {
             "Content-Type": "application/json",
@@ -330,7 +325,7 @@ async function braveTranslate(
         }
     } catch {}
 
-    // Fallback: MyMemory (privacy-friendly alternative)
+    // Fallback: MyMemory
     try {
         const pair = `${source === "auto" ? "Autodetect" : source}|${target}`;
         const url = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(
@@ -348,11 +343,10 @@ async function braveTranslate(
         }
     } catch {}
 
-    // Final fallback to Microsoft engine
+    // Fallback: Microsoft
     return microsoftTranslate(text, source, target);
 }
 
-// Universal translate dispatcher
 async function executeTranslation(
     text: string,
     source: string,
@@ -391,7 +385,7 @@ function formatResult(
 }
 
 // -------------------------------------------------------------
-// UI / Action Sheet Helpers
+// UI Helpers
 // -------------------------------------------------------------
 
 const isRow = (el: any): boolean =>
@@ -417,7 +411,6 @@ function findRowArray(node: any, depth = 0): any[] | undefined {
     return undefined;
 }
 
-// Resolves Discord's native translate/locale icon asset ID
 function resolveTranslateIconAsset(): number | undefined {
     try {
         const Assets = findByProps("getAssetIDByName");
@@ -520,12 +513,18 @@ function safePatchAfter(
 }
 
 // -------------------------------------------------------------
-// Valenced Plugin Entry Point
+// Official Valenced Plugin Export
 // -------------------------------------------------------------
 
-export default plugin<Settings>({
+export default plugin<{ jsonStorage: Settings }>({
+    // Eagerly load settings file with defaults (per official Valenced spec)
+    jsonStorage: {
+        load: true,
+        default: DEFAULT_SETTINGS,
+    },
+
     start({ cleanup, jsonStorage, logger }) {
-        logger?.info?.("[Hozy's Translator] Initializing Valenced Translator...");
+        logger?.log?.("[Hozy's Translator] Starting Valenced Translator...");
 
         const MessageUtil = findByProps("sendBotMessage");
         const LazyActionSheet =
@@ -558,15 +557,11 @@ export default plugin<Settings>({
         };
 
         const getSetting = <K extends keyof Settings>(key: K): Settings[K] => {
-            try {
-                const val =
-                    typeof jsonStorage.get === "function"
-                        ? jsonStorage.get(key)
-                        : (jsonStorage as any)[key];
-                return val !== undefined && val !== null ? val : DEFAULT_SETTINGS[key];
-            } catch {
-                return DEFAULT_SETTINGS[key];
-            }
+            return (
+                jsonStorage.cache?.[key] ??
+                (typeof jsonStorage.get === "function" ? jsonStorage.get(key) : undefined) ??
+                DEFAULT_SETTINGS[key]
+            );
         };
 
         const translateMessage = async (message: any) => {
@@ -599,7 +594,6 @@ export default plugin<Settings>({
                 );
 
                 if (MessageUtil && typeof MessageUtil.sendBotMessage === "function") {
-                    // Send an ephemeral message visible only to the current user
                     MessageUtil.sendBotMessage(message.channel_id, formatted);
                 } else {
                     Alert.alert("Translate Result", result.text);
@@ -650,7 +644,6 @@ export default plugin<Settings>({
                                 const rows = findRowArray(tree);
                                 if (!rows || !Array.isArray(rows)) return;
 
-                                // Prevent duplicate injection
                                 if (rows.some((r: any) => r?.key === "hozys_translate_row")) {
                                     return;
                                 }
@@ -684,13 +677,11 @@ export default plugin<Settings>({
                                           onPress: handlePress,
                                       };
 
-                                // Insert "Translate" option with the translation icon
                                 rows.splice(1, 0, React.createElement(sample.type, rowProps));
                             },
                             logger
                         );
 
-                        // Ensure instance patch is cleaned up
                         cleanup(() => {
                             unpatchInstance();
                         });
@@ -700,15 +691,18 @@ export default plugin<Settings>({
             logger
         );
 
-        // Register main unpatch with the lifecycle cleanup
         cleanup(() => {
             unpatchLazy();
-            logger?.info?.("[Hozy's Translator] Plugin unloaded successfully.");
+            logger?.log?.("[Hozy's Translator] Plugin unloaded successfully.");
         });
     },
 
     SettingsComponent({ api }) {
-        const storedSettings: Settings = api.jsonStorage.use() ?? DEFAULT_SETTINGS;
+        const TableRowGroup = Design?.TableRowGroup ?? View;
+        const TableRow = Design?.TableRow ?? View;
+        const TableSwitchRow = Design?.TableSwitchRow ?? View;
+
+        const storedSettings = api.jsonStorage.use() ?? DEFAULT_SETTINGS;
         const engine = storedSettings.engine ?? DEFAULT_SETTINGS.engine;
         const sourceLang = storedSettings.sourceLang ?? DEFAULT_SETTINGS.sourceLang;
         const targetLang = storedSettings.targetLang ?? DEFAULT_SETTINGS.targetLang;
@@ -721,11 +715,7 @@ export default plugin<Settings>({
         const [query, setQuery] = useState("");
 
         const updateSetting = <K extends keyof Settings>(key: K, value: Settings[K]) => {
-            if (typeof api.jsonStorage.set === "function") {
-                api.jsonStorage.set(key, value);
-            } else {
-                (api.jsonStorage as any)[key] = value;
-            }
+            api.jsonStorage.set({ [key]: value });
         };
 
         const currentEngineName =
@@ -761,13 +751,15 @@ export default plugin<Settings>({
                 Alert.alert("Swap Error", "Cannot swap when source language is set to Auto-detect.");
                 return;
             }
-            updateSetting("sourceLang", targetLang);
-            updateSetting("targetLang", sourceLang);
+            api.jsonStorage.set({
+                sourceLang: targetLang,
+                targetLang: sourceLang,
+            });
         };
 
         return (
             <ScrollView style={styles.container}>
-                {/* Header with Translation Icon */}
+                {/* Header */}
                 <View style={styles.headerContainer}>
                     <View style={styles.iconCircle}>
                         <Text style={styles.iconSymbol}>🌐</Text>
@@ -791,7 +783,7 @@ export default plugin<Settings>({
                     />
                 </TableRowGroup>
 
-                {/* Engine Selector Dropdown */}
+                {/* Engine Selector */}
                 {pickerMode === "engine" && (
                     <TableRowGroup title="Select Engine">
                         {ENGINES.map((eng) => {
@@ -857,7 +849,7 @@ export default plugin<Settings>({
                     )}
                 </TableRowGroup>
 
-                {/* Language Selector Modal/Dropdown */}
+                {/* Language Picker */}
                 {(pickerMode === "source" || pickerMode === "target") && (
                     <TableRowGroup
                         title={`Select ${pickerMode === "source" ? "Source" : "Target"} Language`}
@@ -911,7 +903,7 @@ export default plugin<Settings>({
                     </TableRowGroup>
                 )}
 
-                {/* Brave Specific Options */}
+                {/* Brave API Key */}
                 {engine === "brave" && (
                     <TableRowGroup title="Brave Options (Optional)">
                         <View style={styles.searchContainer}>
