@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🌐 Translate Plugin
+# 🌐 Hozy's Translator
 
 **A lightweight, powerful Revenge plugin for Discord (Android)**  
 *Seamlessly translate messages directly within your chat without switching apps.*
@@ -26,9 +26,9 @@ I built this translator plugin for the Revenge Discord client on Android because
 
 ## ✨ Features
 
-* **Inline Translation:** Translates messages instantly without ever leaving Discord.
-* **Seamless UI Integration:** Adds a simple "Translate" option straight into the native message context menu.
-* **Lightweight:** Optimized for fast execution so it won't lag your client.
+- **Inline Translation:** Translates messages instantly without ever leaving Discord.
+- **Seamless UI Integration:** Adds a simple "Translate" option straight into the native message context menu.
+- **Lightweight:** Optimized for fast execution so it won't lag your client.
 
 ---
 
