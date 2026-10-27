@@ -1,6 +1,7 @@
 <div align="center">
 # Under maintenance to convert it from Revenge to Valenced.
-# ~~🌐 Hozy's Translator~~
+
+   ## ~~🌐 Hozy's Translator~~
 
 **A lightweight, powerful Valenced plugin for Discord (Android)**  
 *Seamlessly translate messages directly within your chat without switching apps.*
