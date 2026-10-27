@@ -1,21 +1,16 @@
 {
-  "format": 1,
-  "name": "Hozy's Translator",
-  "id": "hozys-translator",
-  "description": "Translate messages seamlessly directly within chat using Google Translate. Long-press any message and tap Translate.",
-  "authors": [
-    {
-      "name": "HsHs-501"
-    }
-  ],
-  "main": "index.tsx",
-  "version": "1.0.0",
-  "dependencies": {
-    "valenced.api": {
-      "version": ">=1"
+    "format": 1,
+    "id": "com.hshs501.translator",
+    "name": "Hozy's Translator",
+    "author": "HsHs-501",
+    "description": "Translate messages seamlessly directly within chat using Google Translate, Microsoft Translator, or Brave Translator. Long-press any message and tap Translate.",
+    "icon": "TranslateIcon",
+    "version": "1.0.0",
+    "dependencies": {
+        "valenced.api": { "version": ">=1" },
+        "discord": { "version": "*" }
     },
-    "discord": {
-      "version": "*"
+    "dist": {
+        "script": "index.js"
     }
-  }
 }
