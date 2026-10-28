@@ -1,0 +1,15 @@
+{
+    "format": 1,
+    "id": "dev.hozy.translator",
+    "name": "Hozy's Translator",
+    "author": "Hozy",
+    "description": "Long-press a message and tap Translate. Google, Microsoft or Brave translation, shown as a message only you can see.",
+    "version": "1.0.0",
+    "dependencies": {
+        "valenced.api": { "version": ">=1" },
+        "discord": { "version": "*" }
+    },
+    "dist": {
+        "script": "index.js"
+    }
+}
