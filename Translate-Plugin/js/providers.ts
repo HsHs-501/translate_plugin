@@ -1,155 +1,199 @@
-import { langName } from './languages'
+import {
+	React,
+	useState,
+	useMemo,
+	View,
+	RNText,
+	Modal,
+	FlatList,
+	TouchableOpacity,
+	StyleSheet,
+	Design,
+	SearchInput,
+} from './compat'
+import { LanguageItem } from './languages'
 
-export type ProviderId = 'google' | 'microsoft' | 'brave'
-
-export const PROVIDERS: Record<ProviderId, string> = {
-    google: 'Google Translate',
-    microsoft: 'Microsoft Translate',
-    brave: 'Brave Translate',
+interface LanguagePickerProps {
+	visible: boolean
+	title: string
+	languages: LanguageItem[]
+	selectedCode: string
+	onSelect: (code: string) => void
+	onClose: () => void
 }
 
-export interface TranslateResult {
-    text: string
-    /** Detected source language code, when the provider reports one */
-    detected?: string
+export function LanguagePickerModal({
+	visible,
+	title,
+	languages,
+	selectedCode,
+	onSelect,
+	onClose,
+}: LanguagePickerProps) {
+	const [query, setQuery] = useState('')
+
+	const filteredLanguages = useMemo(() => {
+		const q = query.trim().toLowerCase()
+		if (!q) return languages
+		return languages.filter(
+			lang =>
+				lang.name.toLowerCase().includes(q) ||
+				lang.code.toLowerCase().includes(q),
+		)
+	}, [languages, query])
+
+	return (
+		<Modal
+			visible={visible}
+			animationType="slide"
+			transparent={true}
+			onRequestClose={onClose}
+		>
+			<View style={styles.overlay}>
+				<View style={styles.modalContainer}>
+					<View style={styles.header}>
+						<Design.Text variant="heading-lg/semibold" style={styles.headerTitle}>
+							{title}
+						</Design.Text>
+						<TouchableOpacity onPress={onClose} style={styles.closeButton}>
+							<Design.Text variant="text-md/medium" style={styles.closeButtonText}>
+								Close
+							</Design.Text>
+						</TouchableOpacity>
+					</View>
+
+					<View style={styles.searchContainer}>
+						<SearchInput
+							placeholder="Search languages..."
+							onChange={(v: string) => setQuery(v)}
+						/>
+					</View>
+
+					<FlatList
+						data={filteredLanguages}
+						keyExtractor={item => item.code}
+						keyboardShouldPersistTaps="handled"
+						contentContainerStyle={styles.listContent}
+						renderItem={({ item }) => {
+							const isSelected = item.code === selectedCode
+							return (
+								<TouchableOpacity
+									style={[
+										styles.itemRow,
+										isSelected && styles.itemRowSelected,
+									]}
+									onPress={() => {
+										onSelect(item.code)
+										onClose()
+									}}
+								>
+									<View style={styles.itemTextContainer}>
+										<Design.Text
+											variant="text-md/medium"
+											style={[
+												styles.itemTitle,
+												isSelected && styles.itemTitleSelected,
+											]}
+										>
+											{item.name}
+										</Design.Text>
+										<Design.Text
+											variant="text-sm/normal"
+											style={styles.itemSubtitle}
+										>
+											{item.code}
+										</Design.Text>
+									</View>
+									{isSelected && (
+										<Design.Text
+											variant="text-md/bold"
+											style={styles.checkmark}
+										>
+											✓
+										</Design.Text>
+									)}
+								</TouchableOpacity>
+							)
+						}}
+					/>
+				</View>
+			</View>
+		</Modal>
+	)
 }
 
-const enc = encodeURIComponent
-
-async function googleTranslate(
-    text: string,
-    source: string,
-    target: string,
-): Promise<TranslateResult> {
-    const url =
-        'https://translate.googleapis.com/translate_a/single?client=gtx' +
-        `&sl=${enc(source)}&tl=${enc(target)}&dt=t&q=${enc(text)}`
-
-    const res = await fetch(url)
-    if (!res.ok) throw new Error(`Google Translate error ${res.status}`)
-
-    const data = await res.json()
-    const translated = (data[0] as any[]).map(segment => segment[0]).join('')
-    return { text: translated, detected: data[2] }
-}
-
-// Microsoft uses different codes for a few languages
-const MICROSOFT_CODES: Record<string, string> = {
-    'zh-CN': 'zh-Hans',
-    'zh-TW': 'zh-Hant',
-    iw: 'he',
-    jw: 'jv',
-    tl: 'fil',
-    no: 'nb',
-}
-const msCode = (code: string) => MICROSOFT_CODES[code] ?? code
-
-const MS_TOKEN_TTL_MS = 8 * 60 * 1000
-let msToken: { value: string; at: number } | null = null
-
-async function microsoftToken(force: boolean): Promise<string> {
-    if (!force && msToken && Date.now() - msToken.at < MS_TOKEN_TTL_MS) {
-        return msToken.value
-    }
-    const res = await fetch('https://edge.microsoft.com/translate/auth')
-    if (!res.ok) throw new Error(`Microsoft auth error ${res.status}`)
-    const value = (await res.text()).trim()
-    msToken = { value, at: Date.now() }
-    return value
-}
-
-async function microsoftTranslate(
-    text: string,
-    source: string,
-    target: string,
-): Promise<TranslateResult> {
-    const url =
-        'https://api-edge.cognitive.microsofttranslator.com/translate?api-version=3.0' +
-        `&to=${enc(msCode(target))}` +
-        (source === 'auto' ? '' : `&from=${enc(msCode(source))}`)
-
-    const call = (token: string) =>
-        fetch(url, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${token}`,
-            },
-            body: JSON.stringify([{ Text: text }]),
-        })
-
-    let res = await call(await microsoftToken(false))
-    if (res.status === 401) res = await call(await microsoftToken(true))
-    if (!res.ok) throw new Error(`Microsoft Translate error ${res.status}`)
-
-    const data = await res.json()
-    const translated = data?.[0]?.translations?.[0]?.text
-    if (typeof translated !== 'string') {
-        throw new Error('Unexpected Microsoft Translate response')
-    }
-    return { text: translated, detected: data[0]?.detectedLanguage?.language }
-}
-
-// Brave runs its own translation server in the Chromium translate format.
-// This is an undocumented endpoint and may reject requests.
-async function braveTranslate(
-    text: string,
-    source: string,
-    target: string,
-): Promise<TranslateResult> {
-    const url =
-        'https://translate.brave.com/translate_a/t?anno=3&client=te_lib&format=text&v=1.0' +
-        `&sl=${enc(source)}&tl=${enc(target)}&tc=1&sr=1&mode=1`
-
-    const res = await fetch(url, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: `q=${enc(text)}`,
-    })
-    if (!res.ok) throw new Error(`Brave Translate error ${res.status}`)
-
-    const data = await res.json()
-    const first = Array.isArray(data) ? data[0] : data
-    const translated = Array.isArray(first) ? first[0] : first
-    if (typeof translated !== 'string') {
-        throw new Error('Unexpected Brave Translate response')
-    }
-    return {
-        text: translated,
-        detected: Array.isArray(first) ? first[1] : undefined,
-    }
-}
-
-export function translate(
-    provider: ProviderId,
-    text: string,
-    source: string,
-    target: string,
-): Promise<TranslateResult> {
-    switch (provider) {
-        case 'microsoft':
-            return microsoftTranslate(text, source, target)
-        case 'brave':
-            return braveTranslate(text, source, target)
-        default:
-            return googleTranslate(text, source, target)
-    }
-}
-
-export function formatResult(
-    result: TranslateResult,
-    provider: ProviderId,
-    source: string,
-    target: string,
-): string {
-    const from =
-        source === 'auto'
-            ? result.detected
-                ? `${langName(result.detected)} (auto)`
-                : 'Auto-detect'
-            : langName(source)
-    return (
-        `🌐 **Hozy's Translator** (${PROVIDERS[provider]})\n` +
-        `${from} ➜ ${langName(target)}\n${result.text}`
-    )
-}
+const styles = StyleSheet.create({
+	overlay: {
+		flex: 1,
+		backgroundColor: 'rgba(0, 0, 0, 0.65)',
+		justifyContent: 'flex-end',
+	},
+	modalContainer: {
+		backgroundColor: '#1e1f22',
+		borderTopLeftRadius: 18,
+		borderTopRightRadius: 18,
+		maxHeight: '85%',
+		minHeight: '55%',
+		paddingBottom: 24,
+	},
+	header: {
+		flexDirection: 'row',
+		alignItems: 'center',
+		justifyContent: 'space-between',
+		paddingHorizontal: 16,
+		paddingVertical: 14,
+		borderBottomWidth: 1,
+		borderBottomColor: '#2b2d31',
+	},
+	headerTitle: {
+		color: '#ffffff',
+	},
+	closeButton: {
+		paddingHorizontal: 8,
+		paddingVertical: 4,
+	},
+	closeButtonText: {
+		color: '#5865f2',
+	},
+	searchContainer: {
+		paddingHorizontal: 16,
+		paddingVertical: 10,
+	},
+	listContent: {
+		paddingHorizontal: 12,
+		paddingBottom: 16,
+	},
+	itemRow: {
+		flexDirection: 'row',
+		alignItems: 'center',
+		justifyContent: 'space-between',
+		paddingVertical: 12,
+		paddingHorizontal: 14,
+		borderRadius: 8,
+		marginVertical: 2,
+		backgroundColor: '#2b2d31',
+	},
+	itemRowSelected: {
+		backgroundColor: '#35373c',
+		borderLeftWidth: 4,
+		borderLeftColor: '#5865f2',
+	},
+	itemTextContainer: {
+		flex: 1,
+	},
+	itemTitle: {
+		color: '#dbdee1',
+	},
+	itemTitleSelected: {
+		color: '#5865f2',
+		fontWeight: 'bold',
+	},
+	itemSubtitle: {
+		color: '#949ba4',
+		marginTop: 2,
+	},
+	checkmark: {
+		color: '#5865f2',
+		marginLeft: 8,
+	},
+})
