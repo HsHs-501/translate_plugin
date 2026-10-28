@@ -1,9 +1,7 @@
-<div align="center">
-
 # 🌐 Hozy's Translator
 
-**A lightweight, powerful Valenced plugin for Discord (Android)**  
-*Seamlessly translate messages directly within your chat without switching apps.*
+A simple, fast, and lightweight translation plugin for **Valenced** (Discord Android).  
+Translate any message on the fly with a single long-press — right inside your chat without leaving Discord.
 
 <br/>
 
@@ -12,72 +10,58 @@
 [![Discord User](https://img.shields.io/badge/Discord-.95.4-5865F2?style=for-the-badge&logo=discord&logoColor=white)](https://discord.gg/jwpb9YdBJa)
 [![Platform](https://img.shields.io/badge/Platform-Discord%20Android%20(Valenced)-3DDC84?style=for-the-badge&logo=android&logoColor=white)](#)
 
-<br/>
+---
 
-</div>
+### ✨ Features
+
+- 🚀 **One-Tap Long-Press Translation:** Just long-press any message and tap **Translate**.
+- 🔒 **Private & Local:** Translated messages are sent as local bot messages visible **only to you**.
+- 🔑 **No API Keys Needed:** Works directly out of the box using free public endpoints.
+- ⚡ **3 Translation Engines:**
+  - **Google Translate** (Fast, highly accurate, default)
+  - **Microsoft Translator** (Powered by Edge translation engine)
+  - **Brave Translate** (Privacy-focused)
+- 🌍 **100+ Languages Supported:** Full Google Translate language list with automatic source language detection.
+- 🔍 **Searchable Language Picker:** Easily find any language instantly through the in-app search dialog.
+- ⚙️ **Native Discord Settings:** Fully reactive settings panel matching Discord's native design.
 
 ---
 
-## 📖 What is this?
+### 📥 How to Install
 
-Built specifically for the **Valenced** Discord client on Android. This plugin allows you to translate any incoming or outgoing message directly in your chat without switching apps or relying on external web translators.
-
----
-
-## ✨ Features
-
-- **Multi-Engine Support:** Choose between **Google Translate**, **Microsoft Translator (Bing)**, and **Brave Translator**.
-- **Translation Icon:** Displays a native translation icon in Discord's message long-press context menu and in the settings panel.
-- **Inline Translation:** Translates messages directly in chat, visible only to you (local ephemeral message).
-- **Native Context Menu Integration:** Adds a seamless "Translate" option into the Discord message long-press action sheet.
-- **Auto-Detect & 100+ Languages:** Supports automatic language detection and over 100 destination languages.
-- **Reactive Settings UI:** Built with Discord's native design components (`TableRowGroup`, `TableSwitchRow`, `TableRow`) and Valenced's `jsonStorage`.
-- **Auto-copy to Clipboard:** Optional preference to automatically copy translated text to your clipboard.
-- **Memory-Safe:** Uses Valenced's functional lifecycle and clean unpatching (`cleanup()`) to prevent memory leaks when disabled.
-
----
-
-## 📥 Installation
-
-To install this plugin in **Valenced** on Discord (Android):
-
-1. Copy the plugin URL / repository link.
-2. Open Discord and go to **User Settings** (your profile icon).
-3. Scroll down to the **Valenced** section and tap **Plugins**.
+1. Copy the plugin repository URL.
+2. In Discord, go to **User Settings** (your avatar at bottom right).
+3. Scroll down to the **Valenced** section and select **Plugins**.
 4. Tap the **`+`** (Install Plugin) button at the top right.
-5. Paste the plugin URL and confirm the install.
-6. Enable the toggle in the Plugins list.
+5. Paste the URL and confirm.
+6. Enable **Hozy's Translator** in your plugins list.
 
 ---
 
-## 🛠️ How to Use
+### 🛠️ How to Use
 
-1. Open any server text channel or direct message.
+1. Go to any text channel or DM.
 2. **Long-press** any message you want to translate.
-3. Tap the **Translate** button (with the translation icon 🌐) in the context menu.
-4. The translated message will instantly appear right below the original message!
+3. Tap **Translate** in the action sheet menu.
+4. The translated message will instantly appear right below it!
 
 ---
 
-## ⚙️ Configuration
+### ⚙️ Configuration
 
-Inside **User Settings > Valenced > Plugins > Hozy's Translator > Settings**:
-- **Translation Engine:** Switch between **Google Translate**, **Microsoft Translator**, or **Brave Translator**.
-- **Translate from:** Select source language or keep `Auto-detect`.
-- **Translate to:** Select your preferred target language (Default: `Arabic`).
-- **Swap Languages:** Quickly swap source and target languages.
-- **Auto-copy to Clipboard:** Automatically copies translation to clipboard.
+Access settings anytime via **Settings > Valenced > Plugins > Hozy's Translator**:
+- **Translation Engine:** Switch between Google Translate, Microsoft Translator, or Brave Translate.
+- **Translate from:** Pick source language or keep `Auto Detect`.
+- **Translate to:** Set your preferred target language (Default: `Arabic`).
 
 ---
 
-## 👤 Author & Community
+### 👤 Author & Support
 
-- **Developer**: **HsHs-501**
-- **Discord User**: `.95.4`
-- **Discord Server**: [Join Server](https://discord.gg/jwpb9YdBJa)
+- **Author:** Hozy (`HsHs-501`)
+- **Discord:** `.95.4`
+- **Discord Server:** [Join here](https://discord.gg/jwpb9YdBJa)
 
 ---
 
-<div align="center">
-<sub>Built with ❤️ for the Valenced Discord Community</sub>
-</div>
+<sub>Built with ❤️ for the Valenced Discord community.</sub>
