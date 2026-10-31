@@ -1,67 +1,87 @@
-# 🌐 Hozy's Translator
+<div align="center">
 
-A simple, fast, and lightweight translation plugin for **Valenced** (Discord Android).  
-Translate any message on the fly with a single long-press — right inside your chat without leaving Discord.
+# 🌐 Translate Plugin
+
+**A lightweight, powerful Revenge plugin for Discord (Android)**  
+*Seamlessly translate messages directly within your chat without switching apps.*
 
 <br/>
 
 [![Discord Server](https://img.shields.io/badge/Discord-Join%20Server-5865F2?style=for-the-badge&logo=discord&logoColor=white)](https://discord.gg/jwpb9YdBJa)
 [![Developer](https://img.shields.io/badge/Developer-HsHs--501-181717?style=for-the-badge&logo=github&logoColor=white)](#)
 [![Discord User](https://img.shields.io/badge/Discord-.95.4-5865F2?style=for-the-badge&logo=discord&logoColor=white)](https://discord.gg/jwpb9YdBJa)
-[![Platform](https://img.shields.io/badge/Platform-Discord%20Android%20(Valenced)-3DDC84?style=for-the-badge&logo=android&logoColor=white)](#)
+[![Platform](https://img.shields.io/badge/Platform-Discord%20Android%20(Revenge)-3DDC84?style=for-the-badge&logo=android&logoColor=white)](#)
+
+<br/>
+
+</div>
 
 ---
 
-### ✨ Features
+## 📖 What is this?
 
-- 🚀 **One-Tap Long-Press Translation:** Just long-press any message and tap **Translate**.
-- 🔒 **Private & Local:** Translated messages are sent as local bot messages visible **only to you**.
-- 🔑 **No API Keys Needed:** Works directly out of the box using free public endpoints.
-- ⚡ **3 Translation Engines:**
-  - **Google Translate** (Fast, highly accurate, default)
-  - **Microsoft Translator** (Powered by Edge translation engine)
-  - **Brave Translate** (Privacy-focused)
-- 🌍 **100+ Languages Supported:** Full Google Translate language list with automatic source language detection.
-- 🔍 **Searchable Language Picker:** Easily find any language instantly through the in-app search dialog.
-- ⚙️ **Native Discord Settings:** Fully reactive settings panel matching Discord's native design.
+I built this translator plugin for the Revenge Discord client on Android because I was tired of switching apps just to read messages in other languages. This lets you translate everything directly inside your chat view.
 
 ---
 
-### 📥 How to Install
+## ✨ Features
 
-1. Copy the plugin repository URL.
-2. In Discord, go to **User Settings** (your avatar at bottom right).
-3. Scroll down to the **Valenced** section and select **Plugins**.
+* **Inline Translation:** Translates messages instantly without ever leaving Discord.
+* **Seamless UI Integration:** Adds a simple "Translate" option straight into the native message context menu.
+* **Lightweight:** Optimized for fast execution so it won't lag your client.
+
+---
+
+## 📸 Showcase
+
+### Chat Translation
+Seamlessly translate incoming and outgoing messages directly in the chat.
+
+| English to Arabic | Arabic to English |
+| :---: | :---: |
+| <img src="Showcase/0959293b-0992-419a-add4-5f427c4426d2.jpg" width="300" alt="Translation Example 1"/> | <img src="Showcase/161d8f51-f67e-4bd3-b193-50db7fd93eae.jpg" width="300" alt="Translation Example 2"/> |
+
+### Plugin Settings
+Easily configure your translation preferences.
+
+| Main Settings | Language Selection | Search & Auto-detect |
+| :---: | :---: | :---: |
+| <img src="Showcase/Screenshot_٢٠٢٦-١٠-٢٥-١٥-٠٤-٤٧-٨٨٤_app.revenge~2.jpg" width="250" alt="Main Settings"/> | <img src="Showcase/Screenshot_٢٠٢٦-١٠-٢٥-١٥-٠٤-٥٧-٢٢٠_app.revenge~2.jpg" width="250" alt="Language Selection"/> | <img src="Showcase/Screenshot_٢٠٢٦-١٠-٢٥-١٥-٠٥-٠٤-٠٣٥_app.revenge~2.jpg" width="250" alt="Search Languages"/> |
+
+---
+
+## 📥 Installation
+
+To install this plugin in **Revenge** on Discord (Android):
+
+1. Copy the plugin URL:
+   ```text
+   https://hshs-501.github.io/translate_plugin/manifest.json
+   ```
+2. Open Discord and go to **User Settings** (your profile icon).
+3. Scroll down to the **Revenge** section and tap **Plugins**.
 4. Tap the **`+`** (Install Plugin) button at the top right.
-5. Paste the URL and confirm.
-6. Enable **Hozy's Translator** in your plugins list.
+5. Paste the plugin URL and confirm the install.
+6. The plugin will load automatically. Enable the toggle and restart your app!
 
 ---
 
-### 🛠️ How to Use
+## 🛠️ How to Use
 
-1. Go to any text channel or DM.
-2. **Long-press** any message you want to translate.
-3. Tap **Translate** in the action sheet menu.
-4. The translated message will instantly appear right below it!
-
----
-
-### ⚙️ Configuration
-
-Access settings anytime via **Settings > Valenced > Plugins > Hozy's Translator**:
-- **Translation Engine:** Switch between Google Translate, Microsoft Translator, or Brave Translate.
-- **Translate from:** Pick source language or keep `Auto Detect`.
-- **Translate to:** Set your preferred target language (Default: `Arabic`).
+1. Open any server or direct message.
+2. Long-press the message you want to translate.
+3. Tap the **Translate** button in the context menu.
 
 ---
 
-### 👤 Author & Support
+## 👤 Author & Community
 
-- **Author:** Hozy (`HsHs-501`)
-- **Discord:** `.95.4`
-- **Discord Server:** [Join here](https://discord.gg/jwpb9YdBJa)
+- **Developer**: **HsHs-501**
+- **Discord User**: `.95.4`
+- **Discord Server**: [Join Server](https://discord.gg/jwpb9YdBJa)
 
 ---
 
-<sub>Built with ❤️ for the Valenced Discord community.</sub>
+<div align="center">
+<sub>Built with ❤️ for the Revenge Discord Community</sub>
+</div>
