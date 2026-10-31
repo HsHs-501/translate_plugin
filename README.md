@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🌐 Translate Plugin
+# 🌍 Hozy's Translator
 
 **A lightweight, powerful Revenge plugin for Discord (Android)**  
 *Seamlessly translate messages directly within your chat without switching apps.*
@@ -27,6 +27,7 @@ I built this translator plugin for the Revenge Discord client on Android because
 ## ✨ Features
 
 * **Inline Translation:** Translates messages instantly without ever leaving Discord.
+* **Multiple Translation Services:** Choose between Google Translate, Microsoft Translate, and Brave Translate (experimental).
 * **Seamless UI Integration:** Adds a simple "Translate" option straight into the native message context menu.
 * **Lightweight:** Optimized for fast execution so it won't lag your client.
 
@@ -34,19 +35,12 @@ I built this translator plugin for the Revenge Discord client on Android because
 
 ## 📸 Showcase
 
-### Chat Translation
-Seamlessly translate incoming and outgoing messages directly in the chat.
-
-| English to Arabic | Arabic to English |
-| :---: | :---: |
-| <img src="Showcase/0959293b-0992-419a-add4-5f427c4426d2.jpg" width="300" alt="Translation Example 1"/> | <img src="Showcase/161d8f51-f67e-4bd3-b193-50db7fd93eae.jpg" width="300" alt="Translation Example 2"/> |
-
-### Plugin Settings
-Easily configure your translation preferences.
-
-| Main Settings | Language Selection | Search & Auto-detect |
-| :---: | :---: | :---: |
-| <img src="Showcase/Screenshot_٢٠٢٦-١٠-٢٥-١٥-٠٤-٤٧-٨٨٤_app.revenge~2.jpg" width="250" alt="Main Settings"/> | <img src="Showcase/Screenshot_٢٠٢٦-١٠-٢٥-١٥-٠٤-٥٧-٢٢٠_app.revenge~2.jpg" width="250" alt="Language Selection"/> | <img src="Showcase/Screenshot_٢٠٢٦-١٠-٢٥-١٥-٠٥-٠٤-٠٣٥_app.revenge~2.jpg" width="250" alt="Search Languages"/> |
+| **Chat Translation** | **Language Settings** |
+|:---:|:---:|
+| <img src="Showcase/0959293b-0992-419a-add4-5f427c4426d2.jpg" width="250"> | <img src="Showcase/1000330407.jpg" width="250"> |
+| <img src="Showcase/161d8f51-f67e-4bd3-b193-50db7fd93eae.jpg" width="250"> | <img src="Showcase/1000330408.jpg" width="250"> |
+| | <img src="Showcase/1000330409.jpg" width="250"> |
+| | <img src="Showcase/1000330410.jpg" width="250"> |
 
 ---
 
@@ -71,6 +65,7 @@ To install this plugin in **Revenge** on Discord (Android):
 1. Open any server or direct message.
 2. Long-press the message you want to translate.
 3. Tap the **Translate** button in the context menu.
+4. Customize your preferred translation service and languages from the plugin settings!
 
 ---
 
