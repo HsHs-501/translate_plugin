@@ -33,30 +33,19 @@ I built this translator plugin for the Revenge Discord client on Android because
 
 ---
 
-## 📸 Showcase
-
-| **Chat Translation** | **Language Settings** |
-|:---:|:---:|
-| <img src="Showcase/0959293b-0992-419a-add4-5f427c4426d2.jpg" width="250"> | <img src="Showcase/1000330407.jpg" width="250"> |
-| <img src="Showcase/161d8f51-f67e-4bd3-b193-50db7fd93eae.jpg" width="250"> | <img src="Showcase/1000330408.jpg" width="250"> |
-| | <img src="Showcase/1000330409.jpg" width="250"> |
-| | <img src="Showcase/1000330410.jpg" width="250"> |
-
----
-
 ## 📥 Installation
 
 To install this plugin in **Revenge** on Discord (Android):
 
 1. Copy the plugin URL:
    ```text
-   https://hshs-501.github.io/translate_plugin/manifest.json
+   https://hshs-501.github.io/Hozy-Translator/
    ```
-2. Open Discord and go to **User Settings** (your profile icon).
-3. Scroll down to the **Revenge** section and tap **Plugins**.
-4. Tap the **`+`** (Install Plugin) button at the top right.
-5. Paste the plugin URL and confirm the install.
-6. The plugin will load automatically. Enable the toggle and restart your app!
+3. Open Discord and go to **User Settings** (your profile icon).
+4. Scroll down to the **Revenge** section and tap **Plugins**.
+5. Tap the **`+`** (Install Plugin) button at the top right.
+6. Paste the plugin URL and confirm the install.
+7. The plugin will load automatically. Enable the toggle and restart your app!
 
 ---
 
